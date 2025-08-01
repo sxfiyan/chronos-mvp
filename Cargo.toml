@@ -1,0 +1,52 @@
+[package]
+name = "chronos"
+version = "0.1.0"
+edition = "2021"
+authors = ["Chronos Team"]
+description = "Forensic timeline generator for Windows 11 disk images"
+
+[dependencies]
+# Core dependencies
+clap = { version = "4.4", features = ["derive"] }
+anyhow = "1.0"
+thiserror = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+
+# File system and disk image handling
+ntfs = "0.4"
+byteorder = "1.4"
+memmap2 = "0.9"
+
+# Windows Event Log parsing
+evtx = "0.8"
+encoding_rs = "0.8"
+
+# Prefetch file parsing
+nom = "7.1"
+
+# HTML generation
+maud = "0.25"
+
+# Date/time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Performance and utilities
+rayon = "1.7"
+dashmap = "5.4"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[[bin]]
+name = "chronos"
+path = "src/main.rs"
